@@ -39,6 +39,23 @@ class MainActivity : AppCompatActivity() {
                 }
                 return true
             }
+
+            override fun onPageFinished(view: WebView?, url: String?) {
+                super.onPageFinished(view, url)
+                // Injeksi JavaScript untuk mengklik kategori "Local" secara otomatis
+                val script = """
+                    (function() {
+                        var elements = document.querySelectorAll('div, a, span, button');
+                        for (var i = 0; i < elements.length; i++) {
+                            if (elements[i].textContent.trim() === 'Local') {
+                                elements[i].click();
+                                break;
+                            }
+                        }
+                    })();
+                """.trimIndent()
+                view?.evaluateJavascript(script, null)
+            }
         }
 
         // Menangani tombol back dengan cara modern (OnBackPressedDispatcher)
