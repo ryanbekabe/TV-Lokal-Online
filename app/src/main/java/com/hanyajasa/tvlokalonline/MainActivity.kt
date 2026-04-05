@@ -7,7 +7,9 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,7 +17,9 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen() // Pasang splash screen sebelum super.onCreate
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge() // Membuat tampilan memenuhi layar hingga status bar
         setContentView(R.layout.activity_main)
 
         webView = findViewById(R.id.webView)
